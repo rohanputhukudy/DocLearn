@@ -1,29 +1,26 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { APIContext } from './APIContext';
 
-const initialState = {
-  posts: [],
-  fetchPosts: () => {}
-};
-
-export const PostsContext = createContext(initialState);
+export const PostsContext = createContext([]);
 
 export const PostsProvider = ({ children }) => {
-  const [state ,setState] = useState(initialState);
+  const [state, setState] = useState([]);
   const serverURL = useContext(APIContext);
 
-  function fetchPosts() {
-    const response = fetch(serverURL, {
-      method: 'GET',
-    });
+  const fetchPosts = async() => {
+    await fetch(serverURL)
+      .then(res => res.json())
+      .then(data => setState(data));
+    console.log(state);
   };
+
+  useEffect(() => {
+    fetchPosts();
+  });
 
   return (
     <PostsContext.Provider
-      value={{
-        posts: state.posts,
-        fetchPosts,
-      }}
+      value={state}
     >
       {children}
     </PostsContext.Provider>

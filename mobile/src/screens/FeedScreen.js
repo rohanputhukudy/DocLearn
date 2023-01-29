@@ -7,17 +7,13 @@ import { PostsList } from "../components/PostsList";
 
 export const FeedScreen = () => {
   const postsCtx = useContext(PostsContext);
-  useEffect(postsCtx.fetchPosts, []);
 
-  const { posts } = postsCtx;
-  const newPosts = [...posts]
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-    .slice(0,10);
+  const posts = postsCtx;
 
   // mantains search query and filtered posts
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState(newPosts);
+  const [filteredPosts, setFilteredPosts] = useState(posts);
 
   // re-filter when posts from the backend or search term changes
   useEffect(() => {

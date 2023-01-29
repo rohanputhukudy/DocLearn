@@ -42,8 +42,8 @@ const filter = (posts, search, filters) => {
   return posts.filter(post => {
     const title = post.title.toLowerCase();
     const body = post.body.toLowerCase();
-    const isContained = filters.every(val => post.filters.includes(val));
+    // const isContained = filters.every(val => post.filters.includes(val));
 
-    return (title.includes(searchNorm) || body.includes(searchNorm)) && isContained;
+    return (title.includes(searchNorm) || body.includes(searchNorm)); //&& isContained;
   });
 };

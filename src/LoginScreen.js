@@ -1,12 +1,13 @@
 import { Button, View, } from "react-native"
+import { BasicStylesheet } from "./styles/BasicStylesheet";
 
 export const LoginScreen = ({navigation}) => {
   return (
-    <View>
+    <View style={BasicStylesheet.container}>
       <Button
         title="Login"
         onPress={() =>
-          navigation.navigate('Get Started')
+          navigation.replace('Main Screen')
         }
       />
     </View>
